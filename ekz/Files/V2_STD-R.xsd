@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema version="2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="ЭДПФР">
+		<xs:complexType>
+		   <xs:sequence>
+			<xs:element name="СТД-Р">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ЗЛ">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="ФИО" type="xs:string"></xs:element>
+									<xs:element name="ДатаРождения" type="xs:date"></xs:element>
+									<xs:element name="СНИЛС">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:pattern value="[0-9]{3}-[0-9]{3}-[0-9]{3} [0-9]{2}"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Работодатель">
+							<xs:complexType>
+									<xs:sequence>
+										<xs:element name="РегНомер">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[0-9]{3}-[0-9]{3}-[0-9]{6}"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="НаименованиеКраткое" type="xs:string"></xs:element>
+										<xs:element name="ИНН" type="xs:string"></xs:element>
+										<xs:element name="КПП" minOccurs="0" type="xs:string"></xs:element>
+									</xs:sequence>
+								</xs:complexType>
+						</xs:element>
+						<xs:element name="ТрудоваяДеятельность" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="НомерПП" type="xs:positiveInteger"></xs:element>
+									<xs:element name="Дата" type="xs:date"></xs:element>
+									<xs:element name="Вид">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="ПРИЕМ" />
+												<xs:enumeration value="УВОЛЬНЕНИЕ" />
+												<xs:enumeration value="ПЕРЕВОД" />
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="Должность" type="xs:string" minOccurs="0"></xs:element>
+									<xs:element name="СтруктурноеПодразделение" type="xs:string" minOccurs="0"></xs:element>
+									<xs:element name="ОснованиеУвольнения" minOccurs="0">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="ТипОснованияУвольнения" minOccurs="0">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="ТК РФ" />
+															<xs:enumeration value="ИНОЕ" />
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="НормативныйДокумент" type="xs:string" minOccurs="0"></xs:element>
+												<xs:element name="Статья" type="xs:string" minOccurs="0"></xs:element>
+												<xs:element name="Часть" type="xs:string" minOccurs="0"></xs:element>
+												<xs:element name="Пункт" type="xs:string" minOccurs="0"></xs:element>
+												<xs:element name="Подпункт" type="xs:string" minOccurs="0"></xs:element>
+												<xs:element name="Абзац" type="xs:string" minOccurs="0"></xs:element>
+											</xs:sequence>
+										</xs:complexType>
+										</xs:element>
+									<xs:element name="ПричинаУвольнения" type="xs:string" minOccurs="0"></xs:element>
+									<xs:element name="ДатаС" type="xs:date" minOccurs="0"></xs:element>
+									<xs:element name="ДатаПо" type="xs:date" minOccurs="0"></xs:element>
+									<xs:element name="Основание" maxOccurs="2">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Наименование" type="xs:string"></xs:element>
+												<xs:element name="Дата" type="xs:date"></xs:element>
+												<xs:element name="Номер" type="xs:string"></xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="ДатаЗаполнения" type="xs:date"></xs:element>
+						<xs:element name="Руководитель" type="xs:string"></xs:element>
+				</xs:sequence>
+			    </xs:complexType>
+		    </xs:element>
+		 </xs:sequence>	   
+	    </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,670 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ekz_lysanovModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACTIVITIES">
+          <Key>
+            <PropertyRef Name="act_id" />
+          </Key>
+          <Property Name="act_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="act_date" Type="date" />
+          <Property Name="sved_id" Type="int" />
+          <Property Name="dol_id" Type="int" />
+          <Property Name="act_code" Type="int" />
+          <Property Name="prich_id" Type="int" />
+          <Property Name="osn_id" Type="int" />
+          <Property Name="act_from" Type="date" />
+          <Property Name="act_to" Type="date" />
+          <Property Name="act_cancel" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="DOLJNOSTI">
+          <Key>
+            <PropertyRef Name="dol_id" />
+          </Key>
+          <Property Name="dol_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dol_name" Type="nchar" MaxLength="50" />
+          <Property Name="podraz_id" Type="int" />
+        </EntityType>
+        <EntityType Name="LIST">
+          <Key>
+            <PropertyRef Name="list_id" />
+          </Key>
+          <Property Name="list_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="act_id" Type="int" />
+          <Property Name="std_id" Type="int" />
+        </EntityType>
+        <EntityType Name="OSNOVANIYA">
+          <Key>
+            <PropertyRef Name="osn_id" />
+          </Key>
+          <Property Name="osn_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="osn_name" Type="nchar" MaxLength="20" />
+          <Property Name="osn_date" Type="date" />
+          <Property Name="osn_num" Type="int" />
+        </EntityType>
+        <EntityType Name="PODRAZDELENIYA">
+          <Key>
+            <PropertyRef Name="podraz_id" />
+          </Key>
+          <Property Name="podraz_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="podraz_name" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PRICHINI_YVOLNENIYA">
+          <Key>
+            <PropertyRef Name="prich_id" />
+          </Key>
+          <Property Name="prich_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prich_type" Type="nchar" MaxLength="30" />
+          <Property Name="prich_document" Type="nchar" MaxLength="20" />
+          <Property Name="prich_state" Type="int" />
+          <Property Name="prich_part" Type="int" />
+          <Property Name="prich_point" Type="int" />
+          <Property Name="prich_subpoint" Type="int" />
+          <Property Name="prich_abzac" Type="int" />
+        </EntityType>
+        <EntityType Name="RABOTNIKI">
+          <Key>
+            <PropertyRef Name="rab_id" />
+          </Key>
+          <Property Name="rab_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rab_fio" Type="nchar" MaxLength="50" />
+          <Property Name="rab_bdate" Type="date" />
+          <Property Name="rab_snils" Type="nchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="RABOTODATELI">
+          <Key>
+            <PropertyRef Name="dat_id" />
+          </Key>
+          <Property Name="dat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dat_reg_num" Type="nchar" MaxLength="15" />
+          <Property Name="dat_name" Type="nchar" MaxLength="30" />
+          <Property Name="dat_inn" Type="nchar" MaxLength="10" />
+          <Property Name="dat_kpp" Type="nchar" MaxLength="9" />
+        </EntityType>
+        <EntityType Name="STD-R">
+          <Key>
+            <PropertyRef Name="std_id" />
+          </Key>
+          <Property Name="std_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rab_id" Type="int" />
+          <Property Name="dat_id" Type="int" />
+          <Property Name="std_date" Type="date" />
+          <Property Name="std_ryk" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SVEDENIYA">
+          <Key>
+            <PropertyRef Name="sved_id" />
+          </Key>
+          <Property Name="sved_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sved_name" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_ACTIVITIES_DOLJNOSTI">
+          <End Role="DOLJNOSTI" Type="Self.DOLJNOSTI" Multiplicity="0..1" />
+          <End Role="ACTIVITIES" Type="Self.ACTIVITIES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOLJNOSTI">
+              <PropertyRef Name="dol_id" />
+            </Principal>
+            <Dependent Role="ACTIVITIES">
+              <PropertyRef Name="dol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACTIVITIES_OSNOVANIYA">
+          <End Role="OSNOVANIYA" Type="Self.OSNOVANIYA" Multiplicity="0..1" />
+          <End Role="ACTIVITIES" Type="Self.ACTIVITIES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSNOVANIYA">
+              <PropertyRef Name="osn_id" />
+            </Principal>
+            <Dependent Role="ACTIVITIES">
+              <PropertyRef Name="osn_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACTIVITIES_PRICHINI_YVOLNENIYA">
+          <End Role="PRICHINI_YVOLNENIYA" Type="Self.PRICHINI_YVOLNENIYA" Multiplicity="0..1" />
+          <End Role="ACTIVITIES" Type="Self.ACTIVITIES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRICHINI_YVOLNENIYA">
+              <PropertyRef Name="prich_id" />
+            </Principal>
+            <Dependent Role="ACTIVITIES">
+              <PropertyRef Name="prich_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACTIVITIES_SVEDENIYA">
+          <End Role="SVEDENIYA" Type="Self.SVEDENIYA" Multiplicity="0..1" />
+          <End Role="ACTIVITIES" Type="Self.ACTIVITIES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SVEDENIYA">
+              <PropertyRef Name="sved_id" />
+            </Principal>
+            <Dependent Role="ACTIVITIES">
+              <PropertyRef Name="sved_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOLJNOSTI_PODRAZDELENIYA">
+          <End Role="PODRAZDELENIYA" Type="Self.PODRAZDELENIYA" Multiplicity="0..1" />
+          <End Role="DOLJNOSTI" Type="Self.DOLJNOSTI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PODRAZDELENIYA">
+              <PropertyRef Name="podraz_id" />
+            </Principal>
+            <Dependent Role="DOLJNOSTI">
+              <PropertyRef Name="podraz_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIST_ACTIVITIES">
+          <End Role="ACTIVITIES" Type="Self.ACTIVITIES" Multiplicity="0..1" />
+          <End Role="LIST" Type="Self.LIST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVITIES">
+              <PropertyRef Name="act_id" />
+            </Principal>
+            <Dependent Role="LIST">
+              <PropertyRef Name="act_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIST_STD-R">
+          <End Role="STD-R" Type="Self.STD-R" Multiplicity="0..1" />
+          <End Role="LIST" Type="Self.LIST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STD-R">
+              <PropertyRef Name="std_id" />
+            </Principal>
+            <Dependent Role="LIST">
+              <PropertyRef Name="std_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STD-R_RABOTNIKI">
+          <End Role="RABOTNIKI" Type="Self.RABOTNIKI" Multiplicity="0..1" />
+          <End Role="STD-R" Type="Self.STD-R" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RABOTNIKI">
+              <PropertyRef Name="rab_id" />
+            </Principal>
+            <Dependent Role="STD-R">
+              <PropertyRef Name="rab_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STD-R_RABOTODATELI">
+          <End Role="RABOTODATELI" Type="Self.RABOTODATELI" Multiplicity="0..1" />
+          <End Role="STD-R" Type="Self.STD-R" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RABOTODATELI">
+              <PropertyRef Name="dat_id" />
+            </Principal>
+            <Dependent Role="STD-R">
+              <PropertyRef Name="dat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ekz_lysanovModelContainer">
+          <EntitySet Name="ACTIVITIES" EntityType="Self.ACTIVITIES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOLJNOSTI" EntityType="Self.DOLJNOSTI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LIST" EntityType="Self.LIST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OSNOVANIYA" EntityType="Self.OSNOVANIYA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PODRAZDELENIYA" EntityType="Self.PODRAZDELENIYA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRICHINI_YVOLNENIYA" EntityType="Self.PRICHINI_YVOLNENIYA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RABOTNIKI" EntityType="Self.RABOTNIKI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RABOTODATELI" EntityType="Self.RABOTODATELI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STD-R" EntityType="Self.STD-R" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SVEDENIYA" EntityType="Self.SVEDENIYA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ACTIVITIES_DOLJNOSTI" Association="Self.FK_ACTIVITIES_DOLJNOSTI">
+            <End Role="DOLJNOSTI" EntitySet="DOLJNOSTI" />
+            <End Role="ACTIVITIES" EntitySet="ACTIVITIES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACTIVITIES_OSNOVANIYA" Association="Self.FK_ACTIVITIES_OSNOVANIYA">
+            <End Role="OSNOVANIYA" EntitySet="OSNOVANIYA" />
+            <End Role="ACTIVITIES" EntitySet="ACTIVITIES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACTIVITIES_PRICHINI_YVOLNENIYA" Association="Self.FK_ACTIVITIES_PRICHINI_YVOLNENIYA">
+            <End Role="PRICHINI_YVOLNENIYA" EntitySet="PRICHINI_YVOLNENIYA" />
+            <End Role="ACTIVITIES" EntitySet="ACTIVITIES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACTIVITIES_SVEDENIYA" Association="Self.FK_ACTIVITIES_SVEDENIYA">
+            <End Role="SVEDENIYA" EntitySet="SVEDENIYA" />
+            <End Role="ACTIVITIES" EntitySet="ACTIVITIES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOLJNOSTI_PODRAZDELENIYA" Association="Self.FK_DOLJNOSTI_PODRAZDELENIYA">
+            <End Role="PODRAZDELENIYA" EntitySet="PODRAZDELENIYA" />
+            <End Role="DOLJNOSTI" EntitySet="DOLJNOSTI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIST_ACTIVITIES" Association="Self.FK_LIST_ACTIVITIES">
+            <End Role="ACTIVITIES" EntitySet="ACTIVITIES" />
+            <End Role="LIST" EntitySet="LIST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIST_STD-R" Association="Self.FK_LIST_STD-R">
+            <End Role="STD-R" EntitySet="STD-R" />
+            <End Role="LIST" EntitySet="LIST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STD-R_RABOTNIKI" Association="Self.FK_STD-R_RABOTNIKI">
+            <End Role="RABOTNIKI" EntitySet="RABOTNIKI" />
+            <End Role="STD-R" EntitySet="STD-R" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STD-R_RABOTODATELI" Association="Self.FK_STD-R_RABOTODATELI">
+            <End Role="RABOTODATELI" EntitySet="RABOTODATELI" />
+            <End Role="STD-R" EntitySet="STD-R" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ekz_lysanovModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ACTIVITIES">
+          <Key>
+            <PropertyRef Name="act_id" />
+          </Key>
+          <Property Name="act_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="act_date" Type="DateTime" Precision="0" />
+          <Property Name="sved_id" Type="Int32" />
+          <Property Name="dol_id" Type="Int32" />
+          <Property Name="act_code" Type="Int32" />
+          <Property Name="prich_id" Type="Int32" />
+          <Property Name="osn_id" Type="Int32" />
+          <Property Name="act_from" Type="DateTime" Precision="0" />
+          <Property Name="act_to" Type="DateTime" Precision="0" />
+          <Property Name="act_cancel" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="DOLJNOSTI" Relationship="Self.FK_ACTIVITIES_DOLJNOSTI" FromRole="ACTIVITIES" ToRole="DOLJNOSTI" />
+          <NavigationProperty Name="OSNOVANIYA" Relationship="Self.FK_ACTIVITIES_OSNOVANIYA" FromRole="ACTIVITIES" ToRole="OSNOVANIYA" />
+          <NavigationProperty Name="PRICHINI_YVOLNENIYA" Relationship="Self.FK_ACTIVITIES_PRICHINI_YVOLNENIYA" FromRole="ACTIVITIES" ToRole="PRICHINI_YVOLNENIYA" />
+          <NavigationProperty Name="SVEDENIYA" Relationship="Self.FK_ACTIVITIES_SVEDENIYA" FromRole="ACTIVITIES" ToRole="SVEDENIYA" />
+          <NavigationProperty Name="LIST" Relationship="Self.FK_LIST_ACTIVITIES" FromRole="ACTIVITIES" ToRole="LIST" />
+        </EntityType>
+        <EntityType Name="DOLJNOSTI">
+          <Key>
+            <PropertyRef Name="dol_id" />
+          </Key>
+          <Property Name="dol_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dol_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="podraz_id" Type="Int32" />
+          <NavigationProperty Name="ACTIVITIES" Relationship="Self.FK_ACTIVITIES_DOLJNOSTI" FromRole="DOLJNOSTI" ToRole="ACTIVITIES" />
+          <NavigationProperty Name="PODRAZDELENIYA" Relationship="Self.FK_DOLJNOSTI_PODRAZDELENIYA" FromRole="DOLJNOSTI" ToRole="PODRAZDELENIYA" />
+        </EntityType>
+        <EntityType Name="LIST">
+          <Key>
+            <PropertyRef Name="list_id" />
+          </Key>
+          <Property Name="list_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="act_id" Type="Int32" />
+          <Property Name="std_id" Type="Int32" />
+          <NavigationProperty Name="ACTIVITIES" Relationship="Self.FK_LIST_ACTIVITIES" FromRole="LIST" ToRole="ACTIVITIES" />
+          <NavigationProperty Name="STD_R" Relationship="Self.FK_LIST_STD_R" FromRole="LIST" ToRole="STD_R" />
+        </EntityType>
+        <EntityType Name="OSNOVANIYA">
+          <Key>
+            <PropertyRef Name="osn_id" />
+          </Key>
+          <Property Name="osn_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="osn_name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="osn_date" Type="DateTime" Precision="0" />
+          <Property Name="osn_num" Type="Int32" />
+          <NavigationProperty Name="ACTIVITIES" Relationship="Self.FK_ACTIVITIES_OSNOVANIYA" FromRole="OSNOVANIYA" ToRole="ACTIVITIES" />
+        </EntityType>
+        <EntityType Name="PODRAZDELENIYA">
+          <Key>
+            <PropertyRef Name="podraz_id" />
+          </Key>
+          <Property Name="podraz_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="podraz_name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="DOLJNOSTI" Relationship="Self.FK_DOLJNOSTI_PODRAZDELENIYA" FromRole="PODRAZDELENIYA" ToRole="DOLJNOSTI" />
+        </EntityType>
+        <EntityType Name="PRICHINI_YVOLNENIYA">
+          <Key>
+            <PropertyRef Name="prich_id" />
+          </Key>
+          <Property Name="prich_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prich_type" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="prich_document" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="prich_state" Type="Int32" />
+          <Property Name="prich_part" Type="Int32" />
+          <Property Name="prich_point" Type="Int32" />
+          <Property Name="prich_subpoint" Type="Int32" />
+          <Property Name="prich_abzac" Type="Int32" />
+          <NavigationProperty Name="ACTIVITIES" Relationship="Self.FK_ACTIVITIES_PRICHINI_YVOLNENIYA" FromRole="PRICHINI_YVOLNENIYA" ToRole="ACTIVITIES" />
+        </EntityType>
+        <EntityType Name="RABOTNIKI">
+          <Key>
+            <PropertyRef Name="rab_id" />
+          </Key>
+          <Property Name="rab_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rab_fio" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="rab_bdate" Type="DateTime" Precision="0" />
+          <Property Name="rab_snils" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="STD_R" Relationship="Self.FK_STD_R_RABOTNIKI" FromRole="RABOTNIKI" ToRole="STD_R" />
+        </EntityType>
+        <EntityType Name="RABOTODATELI">
+          <Key>
+            <PropertyRef Name="dat_id" />
+          </Key>
+          <Property Name="dat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dat_reg_num" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="dat_name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="dat_inn" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="dat_kpp" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="STD_R" Relationship="Self.FK_STD_R_RABOTODATELI" FromRole="RABOTODATELI" ToRole="STD_R" />
+        </EntityType>
+        <EntityType Name="STD_R">
+          <Key>
+            <PropertyRef Name="std_id" />
+          </Key>
+          <Property Name="std_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rab_id" Type="Int32" />
+          <Property Name="dat_id" Type="Int32" />
+          <Property Name="std_date" Type="DateTime" Precision="0" />
+          <Property Name="std_ryk" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="LIST" Relationship="Self.FK_LIST_STD_R" FromRole="STD_R" ToRole="LIST" />
+          <NavigationProperty Name="RABOTNIKI" Relationship="Self.FK_STD_R_RABOTNIKI" FromRole="STD_R" ToRole="RABOTNIKI" />
+          <NavigationProperty Name="RABOTODATELI" Relationship="Self.FK_STD_R_RABOTODATELI" FromRole="STD_R" ToRole="RABOTODATELI" />
+        </EntityType>
+        <EntityType Name="SVEDENIYA">
+          <Key>
+            <PropertyRef Name="sved_id" />
+          </Key>
+          <Property Name="sved_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sved_name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ACTIVITIES" Relationship="Self.FK_ACTIVITIES_SVEDENIYA" FromRole="SVEDENIYA" ToRole="ACTIVITIES" />
+        </EntityType>
+        <Association Name="FK_ACTIVITIES_DOLJNOSTI">
+          <End Role="DOLJNOSTI" Type="Self.DOLJNOSTI" Multiplicity="0..1" />
+          <End Role="ACTIVITIES" Type="Self.ACTIVITIES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DOLJNOSTI">
+              <PropertyRef Name="dol_id" />
+            </Principal>
+            <Dependent Role="ACTIVITIES">
+              <PropertyRef Name="dol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACTIVITIES_OSNOVANIYA">
+          <End Role="OSNOVANIYA" Type="Self.OSNOVANIYA" Multiplicity="0..1" />
+          <End Role="ACTIVITIES" Type="Self.ACTIVITIES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSNOVANIYA">
+              <PropertyRef Name="osn_id" />
+            </Principal>
+            <Dependent Role="ACTIVITIES">
+              <PropertyRef Name="osn_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACTIVITIES_PRICHINI_YVOLNENIYA">
+          <End Role="PRICHINI_YVOLNENIYA" Type="Self.PRICHINI_YVOLNENIYA" Multiplicity="0..1" />
+          <End Role="ACTIVITIES" Type="Self.ACTIVITIES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRICHINI_YVOLNENIYA">
+              <PropertyRef Name="prich_id" />
+            </Principal>
+            <Dependent Role="ACTIVITIES">
+              <PropertyRef Name="prich_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACTIVITIES_SVEDENIYA">
+          <End Role="SVEDENIYA" Type="Self.SVEDENIYA" Multiplicity="0..1" />
+          <End Role="ACTIVITIES" Type="Self.ACTIVITIES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SVEDENIYA">
+              <PropertyRef Name="sved_id" />
+            </Principal>
+            <Dependent Role="ACTIVITIES">
+              <PropertyRef Name="sved_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIST_ACTIVITIES">
+          <End Role="ACTIVITIES" Type="Self.ACTIVITIES" Multiplicity="0..1" />
+          <End Role="LIST" Type="Self.LIST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVITIES">
+              <PropertyRef Name="act_id" />
+            </Principal>
+            <Dependent Role="LIST">
+              <PropertyRef Name="act_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOLJNOSTI_PODRAZDELENIYA">
+          <End Role="PODRAZDELENIYA" Type="Self.PODRAZDELENIYA" Multiplicity="0..1" />
+          <End Role="DOLJNOSTI" Type="Self.DOLJNOSTI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PODRAZDELENIYA">
+              <PropertyRef Name="podraz_id" />
+            </Principal>
+            <Dependent Role="DOLJNOSTI">
+              <PropertyRef Name="podraz_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIST_STD_R">
+          <End Role="STD_R" Type="Self.STD_R" Multiplicity="0..1" />
+          <End Role="LIST" Type="Self.LIST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STD_R">
+              <PropertyRef Name="std_id" />
+            </Principal>
+            <Dependent Role="LIST">
+              <PropertyRef Name="std_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STD_R_RABOTNIKI">
+          <End Role="RABOTNIKI" Type="Self.RABOTNIKI" Multiplicity="0..1" />
+          <End Role="STD_R" Type="Self.STD_R" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RABOTNIKI">
+              <PropertyRef Name="rab_id" />
+            </Principal>
+            <Dependent Role="STD_R">
+              <PropertyRef Name="rab_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STD_R_RABOTODATELI">
+          <End Role="RABOTODATELI" Type="Self.RABOTODATELI" Multiplicity="0..1" />
+          <End Role="STD_R" Type="Self.STD_R" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RABOTODATELI">
+              <PropertyRef Name="dat_id" />
+            </Principal>
+            <Dependent Role="STD_R">
+              <PropertyRef Name="dat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ekz_lysanovEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACTIVITIES" EntityType="Self.ACTIVITIES" />
+          <EntitySet Name="DOLJNOSTI" EntityType="Self.DOLJNOSTI" />
+          <EntitySet Name="LIST" EntityType="Self.LIST" />
+          <EntitySet Name="OSNOVANIYA" EntityType="Self.OSNOVANIYA" />
+          <EntitySet Name="PODRAZDELENIYA" EntityType="Self.PODRAZDELENIYA" />
+          <EntitySet Name="PRICHINI_YVOLNENIYA" EntityType="Self.PRICHINI_YVOLNENIYA" />
+          <EntitySet Name="RABOTNIKI" EntityType="Self.RABOTNIKI" />
+          <EntitySet Name="RABOTODATELI" EntityType="Self.RABOTODATELI" />
+          <EntitySet Name="STD_R" EntityType="Self.STD_R" />
+          <EntitySet Name="SVEDENIYA" EntityType="Self.SVEDENIYA" />
+          <AssociationSet Name="FK_ACTIVITIES_DOLJNOSTI" Association="Self.FK_ACTIVITIES_DOLJNOSTI">
+            <End Role="DOLJNOSTI" EntitySet="DOLJNOSTI" />
+            <End Role="ACTIVITIES" EntitySet="ACTIVITIES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACTIVITIES_OSNOVANIYA" Association="Self.FK_ACTIVITIES_OSNOVANIYA">
+            <End Role="OSNOVANIYA" EntitySet="OSNOVANIYA" />
+            <End Role="ACTIVITIES" EntitySet="ACTIVITIES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACTIVITIES_PRICHINI_YVOLNENIYA" Association="Self.FK_ACTIVITIES_PRICHINI_YVOLNENIYA">
+            <End Role="PRICHINI_YVOLNENIYA" EntitySet="PRICHINI_YVOLNENIYA" />
+            <End Role="ACTIVITIES" EntitySet="ACTIVITIES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACTIVITIES_SVEDENIYA" Association="Self.FK_ACTIVITIES_SVEDENIYA">
+            <End Role="SVEDENIYA" EntitySet="SVEDENIYA" />
+            <End Role="ACTIVITIES" EntitySet="ACTIVITIES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIST_ACTIVITIES" Association="Self.FK_LIST_ACTIVITIES">
+            <End Role="ACTIVITIES" EntitySet="ACTIVITIES" />
+            <End Role="LIST" EntitySet="LIST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOLJNOSTI_PODRAZDELENIYA" Association="Self.FK_DOLJNOSTI_PODRAZDELENIYA">
+            <End Role="PODRAZDELENIYA" EntitySet="PODRAZDELENIYA" />
+            <End Role="DOLJNOSTI" EntitySet="DOLJNOSTI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIST_STD_R" Association="Self.FK_LIST_STD_R">
+            <End Role="STD_R" EntitySet="STD_R" />
+            <End Role="LIST" EntitySet="LIST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STD_R_RABOTNIKI" Association="Self.FK_STD_R_RABOTNIKI">
+            <End Role="RABOTNIKI" EntitySet="RABOTNIKI" />
+            <End Role="STD_R" EntitySet="STD_R" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STD_R_RABOTODATELI" Association="Self.FK_STD_R_RABOTODATELI">
+            <End Role="RABOTODATELI" EntitySet="RABOTODATELI" />
+            <End Role="STD_R" EntitySet="STD_R" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ekz_lysanovModelContainer" CdmEntityContainer="ekz_lysanovEntities">
+          <EntitySetMapping Name="ACTIVITIES">
+            <EntityTypeMapping TypeName="ekz_lysanovModel.ACTIVITIES">
+              <MappingFragment StoreEntitySet="ACTIVITIES">
+                <ScalarProperty Name="act_id" ColumnName="act_id" />
+                <ScalarProperty Name="act_date" ColumnName="act_date" />
+                <ScalarProperty Name="sved_id" ColumnName="sved_id" />
+                <ScalarProperty Name="dol_id" ColumnName="dol_id" />
+                <ScalarProperty Name="act_code" ColumnName="act_code" />
+                <ScalarProperty Name="prich_id" ColumnName="prich_id" />
+                <ScalarProperty Name="osn_id" ColumnName="osn_id" />
+                <ScalarProperty Name="act_from" ColumnName="act_from" />
+                <ScalarProperty Name="act_to" ColumnName="act_to" />
+                <ScalarProperty Name="act_cancel" ColumnName="act_cancel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOLJNOSTI">
+            <EntityTypeMapping TypeName="ekz_lysanovModel.DOLJNOSTI">
+              <MappingFragment StoreEntitySet="DOLJNOSTI">
+                <ScalarProperty Name="dol_id" ColumnName="dol_id" />
+                <ScalarProperty Name="dol_name" ColumnName="dol_name" />
+                <ScalarProperty Name="podraz_id" ColumnName="podraz_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LIST">
+            <EntityTypeMapping TypeName="ekz_lysanovModel.LIST">
+              <MappingFragment StoreEntitySet="LIST">
+                <ScalarProperty Name="list_id" ColumnName="list_id" />
+                <ScalarProperty Name="act_id" ColumnName="act_id" />
+                <ScalarProperty Name="std_id" ColumnName="std_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OSNOVANIYA">
+            <EntityTypeMapping TypeName="ekz_lysanovModel.OSNOVANIYA">
+              <MappingFragment StoreEntitySet="OSNOVANIYA">
+                <ScalarProperty Name="osn_id" ColumnName="osn_id" />
+                <ScalarProperty Name="osn_name" ColumnName="osn_name" />
+                <ScalarProperty Name="osn_date" ColumnName="osn_date" />
+                <ScalarProperty Name="osn_num" ColumnName="osn_num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PODRAZDELENIYA">
+            <EntityTypeMapping TypeName="ekz_lysanovModel.PODRAZDELENIYA">
+              <MappingFragment StoreEntitySet="PODRAZDELENIYA">
+                <ScalarProperty Name="podraz_id" ColumnName="podraz_id" />
+                <ScalarProperty Name="podraz_name" ColumnName="podraz_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRICHINI_YVOLNENIYA">
+            <EntityTypeMapping TypeName="ekz_lysanovModel.PRICHINI_YVOLNENIYA">
+              <MappingFragment StoreEntitySet="PRICHINI_YVOLNENIYA">
+                <ScalarProperty Name="prich_id" ColumnName="prich_id" />
+                <ScalarProperty Name="prich_type" ColumnName="prich_type" />
+                <ScalarProperty Name="prich_document" ColumnName="prich_document" />
+                <ScalarProperty Name="prich_state" ColumnName="prich_state" />
+                <ScalarProperty Name="prich_part" ColumnName="prich_part" />
+                <ScalarProperty Name="prich_point" ColumnName="prich_point" />
+                <ScalarProperty Name="prich_subpoint" ColumnName="prich_subpoint" />
+                <ScalarProperty Name="prich_abzac" ColumnName="prich_abzac" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RABOTNIKI">
+            <EntityTypeMapping TypeName="ekz_lysanovModel.RABOTNIKI">
+              <MappingFragment StoreEntitySet="RABOTNIKI">
+                <ScalarProperty Name="rab_id" ColumnName="rab_id" />
+                <ScalarProperty Name="rab_fio" ColumnName="rab_fio" />
+                <ScalarProperty Name="rab_bdate" ColumnName="rab_bdate" />
+                <ScalarProperty Name="rab_snils" ColumnName="rab_snils" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RABOTODATELI">
+            <EntityTypeMapping TypeName="ekz_lysanovModel.RABOTODATELI">
+              <MappingFragment StoreEntitySet="RABOTODATELI">
+                <ScalarProperty Name="dat_id" ColumnName="dat_id" />
+                <ScalarProperty Name="dat_reg_num" ColumnName="dat_reg_num" />
+                <ScalarProperty Name="dat_name" ColumnName="dat_name" />
+                <ScalarProperty Name="dat_inn" ColumnName="dat_inn" />
+                <ScalarProperty Name="dat_kpp" ColumnName="dat_kpp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STD_R">
+            <EntityTypeMapping TypeName="ekz_lysanovModel.STD_R">
+              <MappingFragment StoreEntitySet="STD-R">
+                <ScalarProperty Name="std_id" ColumnName="std_id" />
+                <ScalarProperty Name="rab_id" ColumnName="rab_id" />
+                <ScalarProperty Name="dat_id" ColumnName="dat_id" />
+                <ScalarProperty Name="std_date" ColumnName="std_date" />
+                <ScalarProperty Name="std_ryk" ColumnName="std_ryk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SVEDENIYA">
+            <EntityTypeMapping TypeName="ekz_lysanovModel.SVEDENIYA">
+              <MappingFragment StoreEntitySet="SVEDENIYA">
+                <ScalarProperty Name="sved_id" ColumnName="sved_id" />
+                <ScalarProperty Name="sved_name" ColumnName="sved_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

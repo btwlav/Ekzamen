@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aaba5e3c031a4da7b41b4b41dc67194f" Name="Diagram1">
+        <EntityTypeShape EntityType="ekz_lysanovModel.ACTIVITIES" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ekz_lysanovModel.DOLJNOSTI" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ekz_lysanovModel.LIST" Width="1.5" PointX="7.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ekz_lysanovModel.OSNOVANIYA" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ekz_lysanovModel.PODRAZDELENIYA" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ekz_lysanovModel.PRICHINI_YVOLNENIYA" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ekz_lysanovModel.RABOTNIKI" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ekz_lysanovModel.RABOTODATELI" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="ekz_lysanovModel.STD_R" Width="1.5" PointX="5.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ekz_lysanovModel.SVEDENIYA" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <AssociationConnector Association="ekz_lysanovModel.FK_ACTIVITIES_DOLJNOSTI" ManuallyRouted="false" />
+        <AssociationConnector Association="ekz_lysanovModel.FK_ACTIVITIES_OSNOVANIYA" ManuallyRouted="false" />
+        <AssociationConnector Association="ekz_lysanovModel.FK_ACTIVITIES_PRICHINI_YVOLNENIYA" ManuallyRouted="false" />
+        <AssociationConnector Association="ekz_lysanovModel.FK_ACTIVITIES_SVEDENIYA" ManuallyRouted="false" />
+        <AssociationConnector Association="ekz_lysanovModel.FK_LIST_ACTIVITIES" ManuallyRouted="false" />
+        <AssociationConnector Association="ekz_lysanovModel.FK_DOLJNOSTI_PODRAZDELENIYA" ManuallyRouted="false" />
+        <AssociationConnector Association="ekz_lysanovModel.FK_LIST_STD_R" ManuallyRouted="false" />
+        <AssociationConnector Association="ekz_lysanovModel.FK_STD_R_RABOTNIKI" ManuallyRouted="false" />
+        <AssociationConnector Association="ekz_lysanovModel.FK_STD_R_RABOTODATELI" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
